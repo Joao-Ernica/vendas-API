@@ -21,5 +21,4 @@ public class VendaRequest {
 
 	@NotNull(message = "Necessário informar o vendedor")
 	private Long vendedorId;
-
 }
