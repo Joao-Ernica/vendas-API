@@ -1,0 +1,15 @@
+target/
+.idea/
+*.iml
+*.log
+hs_err_pid*
+.classpath
+.project
+.settings/
+.vscode/
+/bin/
+/out/
+.DS_Store
+.env
+/logs/
+**/.factorypath
