@@ -1,0 +1,33 @@
+package com.vendasapi.controller;
+
+import com.vendasapi.mapper.VendedorMapping;
+import com.vendasapi.model.dto.request.VendedorRequest;
+import com.vendasapi.model.dto.response.VendedorResponse;
+import com.vendasapi.model.entity.Vendedor;
+import com.vendasapi.service.VendedorService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("api/vendedor")
+public class VededorController {
+
+	private final VendedorService vendedorService;
+	private final VendedorMapping vendedorMapping;
+
+	@GetMapping
+	public List<VendedorResponse> listarVendedores() {
+		List<Vendedor> vendas = vendedorService.listarVendedores();
+		return vendedorMapping.toVendedorResponseList(vendas);
+	}
+
+	@PostMapping
+	public VendedorResponse criarVendedor(@Valid @RequestBody VendedorRequest request) {
+		Vendedor vendedor = vendedorService.criarVendedor(request);
+		return vendedorMapping.toVendedorResponse(vendedor); // mapeia para DTO de saída
+	}
+}

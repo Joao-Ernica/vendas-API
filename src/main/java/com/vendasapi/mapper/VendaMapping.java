@@ -19,9 +19,11 @@ public class VendaMapping {
         return mapper.map(request, Venda.class);
     }
 
-    public VendaResponse toVendaResponse(Venda venda) {
-        return mapper.map(venda, VendaResponse.class);
-    }
+	public VendaResponse toVendaResponse(Venda venda) {
+		VendaResponse response = mapper.map(venda, VendaResponse.class);
+		response.setVendedorNome(venda.getVendedorNomeSnapshot());
+		return response;
+	}
 
     public List<VendaResponse> toVendaResponseList(List<Venda> vendas) {
         return vendas
