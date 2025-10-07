@@ -20,9 +20,6 @@ import jakarta.validation.constraints.Positive;
 @Table(name = "vendas")
 public class Venda {
 
-	// id, dataVenda, valor
-	// relação ManyToOne com Vendedor
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Setter(AccessLevel.NONE)
@@ -46,7 +43,7 @@ public class Venda {
 	private Vendedor vendedor;
 
 	@UpdateTimestamp
-	@Column(name = "data_atualizacao")
+	@Column(name = "data_de_atualizacao")
 	private LocalDateTime dataAtualizacao;
 
 	// Snapshot serve para guardar o nome na venda caso o vendedor o mude

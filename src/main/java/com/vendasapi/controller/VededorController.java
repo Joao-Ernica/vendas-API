@@ -30,4 +30,16 @@ public class VededorController {
 		Vendedor vendedor = vendedorService.criarVendedor(request);
 		return vendedorMapping.toVendedorResponse(vendedor); // mapeia para DTO de saída
 	}
+
+	@GetMapping("{id}")
+	public VendedorResponse buscarVendedorPorId(@PathVariable Long id) {
+		Vendedor vendedor = vendedorService.buscarVendedorPorId(id);
+		return vendedorMapping.toVendedorResponse(vendedor);
+	}
+
+	@PatchMapping("{id}/nome")
+	public VendedorResponse atualizarNomeVendedor(@PathVariable Long id, @RequestBody String novoNome) {
+		Vendedor vendedor = vendedorService.atualizarNomeVendedor(id, novoNome);
+		return vendedorMapping.toVendedorResponse(vendedor);
+	}
 }

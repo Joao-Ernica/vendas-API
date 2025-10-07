@@ -1,6 +1,7 @@
 package com.vendasapi.model.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.vendasapi.enums.StatusVenda;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,4 +25,6 @@ public class VendaResponse {
 
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	private LocalDateTime dataAtualizacao;
+
+	private StatusVenda status;
 }

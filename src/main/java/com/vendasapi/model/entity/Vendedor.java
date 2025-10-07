@@ -15,8 +15,6 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "vendedor")
 public class Vendedor {
 
-	// id, Nome
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Setter(AccessLevel.NONE)

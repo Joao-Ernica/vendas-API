@@ -30,4 +30,17 @@ public class VendaController {
 		Venda venda = vendaService.criarVenda(request);
 		return vendaMapping.toVendaResponse(venda);
 	}
+
+	@GetMapping("{Id}")
+	public VendaResponse buscarVendaPorId(@PathVariable Long id) {
+		Venda venda = vendaService.buscarVendaPorId(id);
+		return vendaMapping.toVendaResponse(venda);
+	}
+
+	@PatchMapping("{id}/cancelar")
+	public VendaResponse cancelarVenda(@PathVariable Long id) {
+		Venda venda = vendaService.cancelarVenda(id);
+		return vendaMapping.toVendaResponse(venda);
+	}
 }
+

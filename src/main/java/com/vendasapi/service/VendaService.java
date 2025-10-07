@@ -1,6 +1,6 @@
 package com.vendasapi.service;
 
-import com.vendasapi.mapper.VendaMapping;
+import com.vendasapi.enums.StatusVenda;
 import com.vendasapi.model.dto.request.VendaRequest;
 import com.vendasapi.model.entity.Venda;
 import com.vendasapi.model.entity.Vendedor;
@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -20,14 +19,13 @@ public class VendaService {
 
 	private final VendaRepository vendaRepository;
 	private final VendedorRepository vendedorRepository;
-	private final VendaMapping vendaMapping;
 
 	@Transactional(readOnly = true)
-	public List<Venda> listarVendas(){
+	public List<Venda> listarVendas() {
 		return vendaRepository.findAllByOrderByDataVendaAsc();
 	}
 
-	public Venda criarVenda(VendaRequest request){
+	public Venda criarVenda(VendaRequest request) {
 		Vendedor vendedor = vendedorRepository.findById(request.getVendedorId())
 				.orElseThrow(() -> new IllegalArgumentException("Vendedor não encontrado"));
 
@@ -39,4 +37,26 @@ public class VendaService {
 
 		return vendaRepository.save(venda);
 	}
+
+	@Transactional(readOnly = true)
+	public Venda buscarVendaPorId(Long id) {
+		return vendaRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Venda não encontrada"));
+	}
+
+	public Venda cancelarVenda(Long id) {
+		Venda venda = buscarVendaPorId(id);
+
+		if (venda.getStatus() == StatusVenda.CANCELADA) {
+			throw new IllegalArgumentException("Venda já está cancelada");
+		}
+
+		if (venda.getStatus() == StatusVenda.FINALIZADA) {
+			throw new IllegalArgumentException("Não é possível cancelar uma venda finalizada");
+		}
+
+		venda.setStatus(StatusVenda.CANCELADA);
+		return vendaRepository.save(venda);
+	}
+
 }
