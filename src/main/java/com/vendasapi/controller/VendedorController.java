@@ -2,19 +2,22 @@ package com.vendasapi.controller;
 
 import com.vendasapi.mapper.VendedorMapping;
 import com.vendasapi.model.dto.request.VendedorRequest;
+import com.vendasapi.model.dto.response.VendedorRelatorioResponse;
 import com.vendasapi.model.dto.response.VendedorResponse;
 import com.vendasapi.model.entity.Vendedor;
 import com.vendasapi.service.VendedorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/vendedor")
-public class VededorController {
+public class VendedorController {
 
 	private final VendedorService vendedorService;
 	private final VendedorMapping vendedorMapping;
@@ -41,5 +44,13 @@ public class VededorController {
 	public VendedorResponse atualizarNomeVendedor(@PathVariable Long id, @RequestBody String novoNome) {
 		Vendedor vendedor = vendedorService.atualizarNomeVendedor(id, novoNome);
 		return vendedorMapping.toVendedorResponse(vendedor);
+	}
+
+	@GetMapping("relatorio")
+	public List<VendedorRelatorioResponse> relatorioVendedor(
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicial,
+			@RequestParam @DateTimeFormat (iso = DateTimeFormat.ISO.DATE)LocalDate dataFinal) {
+
+		return vendedorService.relatorioVendedor(dataInicial, dataFinal);
 	}
 }

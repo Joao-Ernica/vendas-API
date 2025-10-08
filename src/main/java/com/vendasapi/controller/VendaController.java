@@ -3,12 +3,15 @@ package com.vendasapi.controller;
 import com.vendasapi.mapper.VendaMapping;
 import com.vendasapi.model.dto.request.VendaRequest;
 import com.vendasapi.model.dto.response.VendaResponse;
+import com.vendasapi.model.dto.response.VendedorRelatorioResponse;
 import com.vendasapi.model.entity.Venda;
 import com.vendasapi.service.VendaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -31,7 +34,7 @@ public class VendaController {
 		return vendaMapping.toVendaResponse(venda);
 	}
 
-	@GetMapping("{Id}")
+	@GetMapping("{id}")
 	public VendaResponse buscarVendaPorId(@PathVariable Long id) {
 		Venda venda = vendaService.buscarVendaPorId(id);
 		return vendaMapping.toVendaResponse(venda);
@@ -43,4 +46,3 @@ public class VendaController {
 		return vendaMapping.toVendaResponse(venda);
 	}
 }
-

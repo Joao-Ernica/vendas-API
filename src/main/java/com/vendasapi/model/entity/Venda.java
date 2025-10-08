@@ -49,4 +49,14 @@ public class Venda {
 	// Snapshot serve para guardar o nome na venda caso o vendedor o mude
 	@Column(name = "vendedor_nome_snapshot", length = 120, nullable = false)
 	private String vendedorNomeSnapshot;
+
+	public void checarStatus() {
+		if (this.status == StatusVenda.CANCELADA) {
+			throw new IllegalArgumentException("Venda já está cancelada");
+		}
+
+		if (this.status == StatusVenda.FINALIZADA) {
+			throw new IllegalArgumentException("Não é possível cancelar uma venda finalizada");
+		}
+	}
 }

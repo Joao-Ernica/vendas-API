@@ -2,6 +2,7 @@ package com.vendasapi.service;
 
 import com.vendasapi.enums.StatusVenda;
 import com.vendasapi.model.dto.request.VendaRequest;
+import com.vendasapi.model.dto.response.VendedorRelatorioResponse;
 import com.vendasapi.model.entity.Venda;
 import com.vendasapi.model.entity.Vendedor;
 import com.vendasapi.repository.VendaRepository;
@@ -10,7 +11,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -47,16 +54,9 @@ public class VendaService {
 	public Venda cancelarVenda(Long id) {
 		Venda venda = buscarVendaPorId(id);
 
-		if (venda.getStatus() == StatusVenda.CANCELADA) {
-			throw new IllegalArgumentException("Venda já está cancelada");
-		}
-
-		if (venda.getStatus() == StatusVenda.FINALIZADA) {
-			throw new IllegalArgumentException("Não é possível cancelar uma venda finalizada");
-		}
+		venda.checarStatus();
 
 		venda.setStatus(StatusVenda.CANCELADA);
 		return vendaRepository.save(venda);
 	}
-
 }
