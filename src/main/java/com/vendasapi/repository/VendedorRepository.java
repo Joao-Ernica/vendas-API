@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface VendedorRepository extends JpaRepository<Vendedor, Long> {
 
-	List<Vendedor> findAllByOrderByNomeAsc();
+    List<Vendedor> findAllByOrderByNomeAsc();
 
 	@Query("""
     SELECT new com.vendasapi.model.dto.response.VendedorRelatorioResponse(

@@ -49,7 +49,7 @@ public class VendedorController {
 	@GetMapping("relatorio")
 	public List<VendedorRelatorioResponse> relatorioVendedor(
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicial,
-			@RequestParam @DateTimeFormat (iso = DateTimeFormat.ISO.DATE)LocalDate dataFinal) {
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFinal) {
 
 		return vendedorService.relatorioVendedor(dataInicial, dataFinal);
 	}

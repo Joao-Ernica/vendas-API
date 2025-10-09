@@ -52,7 +52,6 @@ public class VendedorService {
 			throw new IllegalArgumentException("As datas devem ser informadas");
 		}
 
-		//convertendo para que
 		LocalDateTime inicio = dataInicial.atTime(LocalTime.MIN);
 		LocalDateTime fim = dataFinal.atTime(LocalTime.MAX);
 
