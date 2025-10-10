@@ -2,7 +2,6 @@ package com.vendasapi.service;
 
 import com.vendasapi.enums.StatusVenda;
 import com.vendasapi.model.dto.request.VendaRequest;
-import com.vendasapi.model.dto.response.VendedorRelatorioResponse;
 import com.vendasapi.model.entity.Venda;
 import com.vendasapi.model.entity.Vendedor;
 import com.vendasapi.repository.VendaRepository;
@@ -11,13 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor

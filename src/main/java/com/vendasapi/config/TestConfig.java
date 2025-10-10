@@ -17,7 +17,7 @@ import java.util.List;
 @Configuration
 @EnableJpaAuditing
 @Profile("test")
-public class testConfig implements CommandLineRunner {
+public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private VendedorRepository vendedorRepository;
@@ -50,7 +50,7 @@ public class testConfig implements CommandLineRunner {
 		Venda venda3 = Venda.builder()
 				.valor(new BigDecimal(200))
 				.vendedorNomeSnapshot("Ana")
-				.vendedor(vendedor).build();
+				.vendedor(vendedor2).build();
 
 		vendaRepository.saveAll(List.of(venda, venda2, venda3));
 	}
