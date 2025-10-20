@@ -46,7 +46,6 @@ public class Venda {
 	@Column(name = "data_de_atualizacao")
 	private LocalDateTime dataAtualizacao;
 
-	// Snapshot serve para guardar o nome na venda caso o vendedor o mude
 	@Column(name = "vendedor_nome_snapshot", length = 120, nullable = false)
 	private String vendedorNomeSnapshot;
 
